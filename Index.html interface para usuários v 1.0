@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Sistema de Estacionamento</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f2f4f7;
+    display: flex;
+    height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    background: #dcdde1;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+
+.sidebar li {
+    list-style: none;
+    padding: 12px;
+    background: #fff;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* ESTACIONAMENTO */
+.parking {
+    width: 300px;
+    background: #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.vaga {
+    height: 60px;
+    border-radius: 6px;
+    background: #2ecc71;
+}
+
+.vaga.ocupada {
+    background: #e74c3c;
+}
+
+/* STATUS */
+.status {
+    width: 220px;
+    background: #1e272e;
+    color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.percent {
+    font-size: 32px;
+    margin: 20px 0;
+}
+
+.status button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.entrada { background: #2ecc71; }
+.saida { background: #e74c3c; color: #fff; }
+
+/* TICKETS */
+.tickets {
+    flex: 1;
+    background: #111;
+    color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.ticket {
+    background: #222;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>Usuário</h2>
+    <li>Dados Cadastrais</li>
+    <li>Alterar Senha</li>
+    <li>Informações</li>
+    <li>Suporte</li>
+</div>
+
+<div class="main">
+
+    <div class="parking">
+        <h3>Estacionamento</h3>
+        <div class="grid" id="vagas"></div>
+    </div>
+
+    <div class="status">
+        <h3>Ocupação</h3>
+        <div class="percent" id="percentual">0%</div>
+
+        <!-- BOTÕES SÓ PARA ADMIN -->
+        <div id="adminControls">
+            <button class="entrada" onclick="entrada()">Entrou Carro</button>
+            <button class="saida" onclick="saida()">Saiu Carro</button>
+        </div>
+    </div>
+
+    <div class="tickets">
+        <h3>Tickets</h3>
+        <div id="listaTickets"></div>
+    </div>
+
+</div>
+
+<script>
+const perfil = "usuario"; // admin ou usuario
+const totalVagas = 9;
+let ocupadas = 0;
+let ticketId = 1;
+
+const vagasEl = document.getElementById("vagas");
+const percentualEl = document.getElementById("percentual");
+const ticketsEl = document.getElementById("listaTickets");
+const adminControls = document.getElementById("adminControls");
+
+if (perfil === "usuario") {
+    adminControls.style.display = "none";
+}
+
+function render() {
+    vagasEl.innerHTML = "";
+    for (let i = 0; i < totalVagas; i++) {
+        const v = document.createElement("div");
+        v.className = "vaga" + (i < ocupadas ? " ocupada" : "");
+        vagasEl.appendChild(v);
+    }
+    percentualEl.innerText = Math.round((ocupadas / totalVagas) * 100) + "%";
+}
+
+function entrada() {
+    if (ocupadas < totalVagas) {
+        ocupadas++;
+        ticketsEl.innerHTML += <div class="ticket">Ticket #${ticketId++} - Entrada registrada</div>;
+        render();
+    }
+}
+
+function saida() {
+    if (ocupadas > 0) {
+        ocupadas--;
+        ticketsEl.innerHTML += <div class="ticket">Ticket #${ticketId++} - Saída registrada</div>;
+        render();
+    }
+}
+
+render();
+</script>
+
+</body>
+</html>
