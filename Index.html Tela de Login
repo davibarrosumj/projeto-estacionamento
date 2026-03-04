@@ -73,3 +73,17 @@
         background: #2980b9;
     }
 </style>
+
+<div class="login-container">
+    <h2>Login</h2>
+
+    <form>
+        <label for="usuario">Usuário</label>
+        <input type="text" id="usuario" placeholder="Digite seu usuário">
+
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" placeholder="Digite sua senha">
+
+        <button type="submit">Entrar</button>
+    </form>
+</div>
