@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+<meta charset="UTF-8">
+<title>Dados Cadastrais</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f9;
+padding:40px;
+}
+
+h1{
+margin-bottom:20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+th,td{
+padding:10px;
+border-bottom:1px solid #ddd;
+font-size:14px;
+}
+
+th{
+background:#2f3640;
+color:white;
+}
+
+button{
+padding:6px 10px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.editar{
+background:#3498db;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Clientes Cadastrados</h1>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>Nome Completo</th>
+<th>CPF</th>
+<th>Banco</th>
+<th>Data Nascimento</th>
+<th>Telefone</th>
+<th>Endereço</th>
+<th>Ação</th>
+
+</tr>
+
+</thead>
+
+<tbody id="clientesTabela">
+
+</tbody>
+
+</table>
+
+<script>
+
+const clientes = [
+
+{
+id:1,
+nome:"Carlos Silva",
+cpf:"123.456.789-10",
+banco:"Banco do Brasil",
+nascimento:"12/04/1995",
+telefone:"99999-1111",
+endereco:"Rua das Flores, 120"
+},
+
+{
+id:2,
+nome:"Maria Souza",
+cpf:"987.654.321-00",
+banco:"Caixa Econômica",
+nascimento:"03/09/1998",
+telefone:"99999-2222",
+endereco:"Av Central, 340"
+}
+
+]
+
+function carregarClientes(){
+
+let tabela = document.getElementById("clientesTabela")
+
+tabela.innerHTML=""
+
+clientes.forEach(cliente=>{
+
+tabela.innerHTML += `
+
+<tr>
+
+<td>${cliente.id}</td>
+<td>${cliente.nome}</td>
+<td>${cliente.cpf}</td>
+<td>${cliente.banco}</td>
+<td>${cliente.nascimento}</td>
+<td>${cliente.telefone}</td>
+<td>${cliente.endereco}</td>
+
+<td>
+
+<button class="editar" onclick="editar(${cliente.id})">
+Editar
+</button>
+
+</td>
+
+</tr>
+
+`
+
+})
+
+}
+
+function editar(id){
+
+let cliente = clientes.find(c=>c.id===id)
+
+let nome = prompt("Nome Completo:",cliente.nome)
+let cpf = prompt("CPF:",cliente.cpf)
+let banco = prompt("Dados Bancários:",cliente.banco)
+let nascimento = prompt("Data de Nascimento:",cliente.nascimento)
+let telefone = prompt("Telefone:",cliente.telefone)
+let endereco = prompt("Endereço:",cliente.endereco)
+
+cliente.nome = nome
+cliente.cpf = cpf
+cliente.banco = banco
+cliente.nascimento = nascimento
+cliente.telefone = telefone
+cliente.endereco = endereco
+
+carregarClientes()
+
+}
+
+carregarClientes()
+
+</script>
+
+</body>
+</html>
