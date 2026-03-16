@@ -1,0 +1,12 @@
+| ID   | Épico                | User Story                                                                                                                                    | Story Points | Prioridade |
+| ---- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---------- |
+| US01 | Controle de Ocupação | Como usuário, quero visualizar a ocupação atual do estacionamento para saber se há vagas disponíveis.                                         | 3            | Alta       |
+| US02 | Controle de Tíquetes | Como usuário, quero visualizar quantos tíquetes pré-pagos ainda possuo para saber se posso utilizar o estacionamento.                         | 2            | Alta       |
+| US03 | Controle de Ocupação | Como administrador, quero registrar manualmente a entrada de um veículo associado a um usuário para controlar a ocupação do estacionamento.   | 3            | Alta       |
+| US04 | Controle de Ocupação | Como administrador, quero registrar manualmente a saída de um veículo para atualizar a ocupação do estacionamento.                            | 3            | Alta       |
+| US05 | Gestão de Usuários   | Como administrador, quero cadastrar usuários do estacionamento para associar o uso do estacionamento aos motoristas.                          | 3            | Alta       |
+| US06 | Controle de Tíquetes | Como administrador, quero registrar o consumo de tíquetes quando um usuário utilizar o estacionamento para controlar os créditos disponíveis. | 5            | Alta       |
+| US07 | Relatórios           | Como administrador, quero visualizar uma tabela de consumo de tíquetes por usuário para acompanhar o uso do estacionamento.                   | 3            | Média      |
+| US08 | Relatórios           | Como administrador, quero gerar relatórios financeiros baseados no consumo de tíquetes para acompanhar a receita do estacionamento.           | 5            | Média      |
+| US09 | Estatísticas         | Como administrador, quero visualizar estatísticas de ocupação do estacionamento para entender padrões de utilização.                          | 5            | Baixa      |
+| US10 | Histórico de Uso     | Como usuário, quero visualizar meu histórico de utilização do estacionamento para acompanhar meu consumo de tíquetes.                         | 3            | Baixa      |
