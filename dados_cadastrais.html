@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
 <meta charset="UTF-8">
-<title>Dados Cadastrais</title>
+<title>Clientes</title>
 
 <style>
 
@@ -28,6 +29,7 @@ th,td{
 padding:10px;
 border-bottom:1px solid #ddd;
 font-size:14px;
+text-align:left;
 }
 
 th{
@@ -47,6 +49,26 @@ background:#3498db;
 color:white;
 }
 
+.salvar{
+background:#27ae60;
+color:white;
+}
+
+tr.editando{
+background:#fff8e1;
+}
+
+input{
+width:100%;
+border:none;
+background:transparent;
+outline:none;
+}
+
+input:disabled{
+color:black;
+}
+
 </style>
 
 </head>
@@ -58,9 +80,7 @@ color:white;
 <table>
 
 <thead>
-
 <tr>
-
 <th>ID</th>
 <th>Nome Completo</th>
 <th>CPF</th>
@@ -69,21 +89,16 @@ color:white;
 <th>Telefone</th>
 <th>Endereço</th>
 <th>Ação</th>
-
 </tr>
-
 </thead>
 
-<tbody id="clientesTabela">
-
-</tbody>
+<tbody id="clientesTabela"></tbody>
 
 </table>
 
 <script>
 
 const clientes = [
-
 {
 id:1,
 nome:"Carlos Silva",
@@ -93,7 +108,6 @@ nascimento:"12/04/1995",
 telefone:"99999-1111",
 endereco:"Rua das Flores, 120"
 },
-
 {
 id:2,
 nome:"Maria Souza",
@@ -103,64 +117,78 @@ nascimento:"03/09/1998",
 telefone:"99999-2222",
 endereco:"Av Central, 340"
 }
-
 ]
 
 function carregarClientes(){
 
 let tabela = document.getElementById("clientesTabela")
+tabela.innerHTML = ""
 
-tabela.innerHTML=""
-
-clientes.forEach(cliente=>{
+clientes.forEach(cliente => {
 
 tabela.innerHTML += `
-
-<tr>
+<tr id="linha-${cliente.id}">
 
 <td>${cliente.id}</td>
-<td>${cliente.nome}</td>
-<td>${cliente.cpf}</td>
-<td>${cliente.banco}</td>
-<td>${cliente.nascimento}</td>
-<td>${cliente.telefone}</td>
-<td>${cliente.endereco}</td>
+
+<td><input id="nome-${cliente.id}" value="${cliente.nome}" disabled></td>
+<td><input id="cpf-${cliente.id}" value="${cliente.cpf}" disabled></td>
+<td><input id="banco-${cliente.id}" value="${cliente.banco}" disabled></td>
+<td><input id="nascimento-${cliente.id}" value="${cliente.nascimento}" disabled></td>
+<td><input id="telefone-${cliente.id}" value="${cliente.telefone}" disabled></td>
+<td><input id="endereco-${cliente.id}" value="${cliente.endereco}" disabled></td>
 
 <td>
-
-<button class="editar" onclick="editar(${cliente.id})">
+<button class="editar" id="btn-${cliente.id}" onclick="toggleEditar(${cliente.id})">
 Editar
 </button>
-
 </td>
 
 </tr>
-
 `
-
 })
 
 }
 
-function editar(id){
+function toggleEditar(id){
 
-let cliente = clientes.find(c=>c.id===id)
+let btn = document.getElementById(`btn-${id}`)
+let linha = document.getElementById(`linha-${id}`)
+let editando = btn.innerText === "Salvar"
 
-let nome = prompt("Nome Completo:",cliente.nome)
-let cpf = prompt("CPF:",cliente.cpf)
-let banco = prompt("Dados Bancários:",cliente.banco)
-let nascimento = prompt("Data de Nascimento:",cliente.nascimento)
-let telefone = prompt("Telefone:",cliente.telefone)
-let endereco = prompt("Endereço:",cliente.endereco)
+let campos = ["nome","cpf","banco","nascimento","telefone","endereco"]
 
-cliente.nome = nome
-cliente.cpf = cpf
-cliente.banco = banco
-cliente.nascimento = nascimento
-cliente.telefone = telefone
-cliente.endereco = endereco
+if(editando){
 
-carregarClientes()
+// SALVAR
+let cliente = clientes.find(c => c.id === id)
+
+campos.forEach(campo => {
+let input = document.getElementById(`${campo}-${id}`)
+cliente[campo] = input.value
+input.disabled = true
+})
+
+btn.innerText = "Editar"
+btn.classList.remove("salvar")
+btn.classList.add("editar")
+
+linha.classList.remove("editando")
+
+}else{
+
+// EDITAR
+campos.forEach(campo => {
+document.getElementById(`${campo}-${id}`).disabled = false
+})
+
+btn.innerText = "Salvar"
+btn.classList.remove("editar")
+btn.classList.add("salvar")
+
+linha.classList.add("editando")
+
+}
 
 }
 
@@ -170,3 +198,4 @@ carregarClientes()
 
 </body>
 </html>
+```
