@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Estacionamento</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="sidebar">
+  <h2>Menu</h2>
+  <ul>
+    <li>
+      <a href="dados.html">Dados Cadastrais</a>
+    </li>
+    <li onclick="logout()">Sair</li>
+  </ul>
+</div>
+
+<div class="main">
+
+  <div id="vagas"></div>
+
+  <div class="status">
+    <select id="user"></select>
+    <button class="entrada" onclick="entrada()">Entrou</button>
+    <button class="saida" onclick="saida()">Saiu</button>
+  </div>
+
+  <div id="tickets"></div>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
